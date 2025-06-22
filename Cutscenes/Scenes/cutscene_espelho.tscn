@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmmdvg2qpd232"]
+
+[ext_resource type="Script" uid="uid://qcjx1ac65ruw" path="res://Cutscenes/Scripts/cutscene_espelho.gd" id="1_n31ag"]
+[ext_resource type="Texture2D" uid="uid://chffvdtfxd3j6" path="res://Components/Assets/vidro_normal.png" id="2_mr8kr"]
+[ext_resource type="Texture2D" uid="uid://cccrrmm3hhd8" path="res://Components/Assets/espelho_quebrado.png" id="3_yhatu"]
+[ext_resource type="Texture2D" uid="uid://m5urmsxc48r2" path="res://Components/Assets/espelho_quebrado_sangue.png" id="4_f24b1"]
+
+[node name="cutscene_espelho" type="Node2D"]
+script = ExtResource("1_n31ag")
+
+[node name="espelho_normal" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(161, 89)
+texture = ExtResource("2_mr8kr")
+
+[node name="espelho_quebrado" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_yhatu")
+offset = Vector2(160, 90)
+
+[node name="espelho_quebrado_sangue" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_f24b1")
+offset = Vector2(160, 90)
+
+[node name="Timer" type="Timer" parent="."]

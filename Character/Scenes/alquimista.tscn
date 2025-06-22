@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2y5ehprnquy4"]
+
+[ext_resource type="Texture2D" uid="uid://bwlld33ma5f3u" path="res://Character/Assets/character.png" id="1_q7vai"]
+[ext_resource type="Script" uid="uid://bsbl40gdp0ek8" path="res://Personagens/Scripts/alquimista_interagivel.gd" id="2_u3p3p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrfv6"]
+size = Vector2(10, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34kvt"]
+size = Vector2(42, 40)
+
+[node name="Alquimista" type="StaticBody2D"]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jrfv6")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_q7vai")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="AreaInteragivel" type="Area2D" parent="." node_paths=PackedStringArray("hud")]
+script = ExtResource("2_u3p3p")
+hud = NodePath("../HUD")
+
+[node name="Collision2" type="CollisionShape2D" parent="AreaInteragivel"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_34kvt")
+
+[connection signal="body_entered" from="AreaInteragivel" to="AreaInteragivel" method="_on_body_entered"]
+[connection signal="body_exited" from="AreaInteragivel" to="AreaInteragivel" method="_on_body_exited"]

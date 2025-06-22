@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg6unjd1olsn"]
+
+[ext_resource type="Script" uid="uid://cut1537cdnd27" path="res://Dialogue/Scripts/dialogue_screen.gd" id="1_5fupu"]
+[ext_resource type="Texture2D" uid="uid://bpimd5jmxws2y" path="res://Dialogue/Assets/11.png" id="1_iyhss"]
+[ext_resource type="FontFile" uid="uid://cj6xr6fo6x4e2" path="res://Sounds Texts/CompassPro.ttf" id="2_5fupu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rlxcx"]
+line_spacing = 0.0
+font = ExtResource("2_5fupu")
+shadow_color = Color(0, 0, 0, 0.6)
+
+[node name="DialogueScreen" type="Control" node_paths=PackedStringArray("_name", "_dialog", "_faceset", "choice_box")]
+custom_minimum_size = Vector2(290, 50)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 114.0
+offset_right = -15.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5fupu")
+_name = NodePath("Background/HContainer/VContainer/Name")
+_dialog = NodePath("Background/HContainer/VContainer/RichTextLabel")
+_faceset = NodePath("Background/HContainer/Border/FaceSet")
+choice_box = NodePath("ChoiceBox")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.792157)
+
+[node name="HContainer" type="HBoxContainer" parent="Background"]
+custom_minimum_size = Vector2(286, 46)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -22.5
+offset_right = 140.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Border" type="ColorRect" parent="Background/HContainer"]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+
+[node name="FaceSet" type="TextureRect" parent="Background/HContainer/Border"]
+custom_minimum_size = Vector2(44, 46)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -23.0
+offset_right = 22.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iyhss")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VContainer" type="VBoxContainer" parent="Background/HContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="Background/HContainer/VContainer"]
+layout_mode = 2
+text = "But"
+label_settings = SubResource("LabelSettings_rlxcx")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/HContainer/VContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_5fupu")
+theme_override_font_sizes/normal_font_size = 16
+text = "adad"
+
+[node name="ChoiceBox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

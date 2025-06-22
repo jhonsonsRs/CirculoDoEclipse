@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=6 format=3 uid="uid://bxdfyu7cv3uy2"]
+
+[ext_resource type="Script" uid="uid://bc0gorxfjwvgs" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="1_0aprh"]
+[ext_resource type="Script" uid="uid://db5iio3bpg72m" path="res://addons/dialogic/Resources/dialogic_style.gd" id="2_3rcw6"]
+[ext_resource type="PackedScene" uid="uid://by6waso0mjpjp" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_SpeakerPortraitTextbox/textbox_with_speaker_portrait.tscn" id="2_jilhd"]
+
+[sub_resource type="Resource" id="Resource_jilhd"]
+script = ExtResource("1_0aprh")
+overrides = {
+"global_font_size": "8.0"
+}
+
+[sub_resource type="Resource" id="Resource_hnj8a"]
+script = ExtResource("1_0aprh")
+scene = ExtResource("2_jilhd")
+overrides = {
+"name_label_custom_size": "8.0"
+}
+
+[resource]
+script = ExtResource("2_3rcw6")
+name = "temaPixelArt"
+layer_list = Array[String](["10"])
+layer_info = {
+"": SubResource("Resource_jilhd"),
+"10": SubResource("Resource_hnj8a")
+}
+base_overrides = {}
+layers = Array[ExtResource("1_0aprh")]([])
+metadata/_latest_layer = "10"
