@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://rv8bkde6luxh"]
+
+[ext_resource type="Texture2D" uid="uid://dpqcicfbyc4q0" path="res://Assets/vela.png" id="1_bp4kr"]
+[ext_resource type="Texture2D" uid="uid://dnd28r1l3qtdi" path="res://Assets/light2D-pixel.png" id="2_6h5o1"]
+
+[node name="vela" type="Node2D"]
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_bp4kr")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 1, 0.631373, 1)
+texture = ExtResource("2_6h5o1")
+texture_scale = 0.1

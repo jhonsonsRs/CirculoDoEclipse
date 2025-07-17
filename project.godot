@@ -11,14 +11,15 @@ config_version=5
 [application]
 
 config/name="Círculo Do Eclipse"
-run/main_scene="uid://bvbmgcguk8h5g"
+run/main_scene="uid://b1ia10g4yl2wr"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+WorldState="*res://Scripts/world_state.gd"
+QuestManager="*res://Scripts/quest_manager.gd"
 
 [dialogic]
 
@@ -87,6 +88,8 @@ enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
 enemy=""
 character=""
 InteractableObjects=""
+player_spawn=""
+game=""
 
 [input]
 
@@ -134,6 +137,11 @@ lantern={
 dialogic_default_action={
 "deadzone": 0.2,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+shoot={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
 

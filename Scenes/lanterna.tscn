@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbpyula1linhb"]
+
+[ext_resource type="Texture2D" uid="uid://7vdqbfmdasg3" path="res://Assets/lantern.png" id="1_ui1hm"]
+[ext_resource type="Script" uid="uid://caynlhufbe4jt" path="res://Scripts/lantern.gd" id="2_ne46u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4n8l"]
+radius = 21.0238
+
+[node name="Lanterna" type="Node2D"]
+script = ExtResource("2_ne46u")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_ui1hm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_d4n8l")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

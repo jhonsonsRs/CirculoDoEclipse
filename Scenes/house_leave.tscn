@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmxdy6d40cpww"]
+
+[ext_resource type="Script" uid="uid://c1pnouj57wsay" path="res://Scripts/house_leave.gd" id="1_y7wtb"]
+[ext_resource type="Texture2D" uid="uid://ybcsxb5veety" path="res://Assets/door_leave.png" id="2_pl2iu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0q04p"]
+size = Vector2(16, 6)
+
+[node name="house_leave" type="Node2D"]
+script = ExtResource("1_y7wtb")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("2_pl2iu")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_0q04p")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

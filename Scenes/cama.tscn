@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://btgyaohfojveo"]
+
+[ext_resource type="Texture2D" uid="uid://bs23ho1joioyx" path="res://Assets/bed.png" id="1_dm2no"]
+[ext_resource type="Script" uid="uid://cb6kwrginss5" path="res://Scripts/bed_interagir.gd" id="2_5d6fs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5d6fs"]
+size = Vector2(16, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm2no"]
+size = Vector2(38, 50)
+
+[node name="Cama" type="StaticBody2D"]
+
+[node name="CollisionPhysics" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_5d6fs")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_dm2no")
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="BedInteragir" type="Area2D" parent="." node_paths=PackedStringArray("_hud")]
+script = ExtResource("2_5d6fs")
+_hud = NodePath("../Hud")
+
+[node name="Collision" type="CollisionShape2D" parent="BedInteragir"]
+shape = SubResource("RectangleShape2D_dm2no")
+
+[connection signal="body_entered" from="BedInteragir" to="BedInteragir" method="_on_body_entered"]
+[connection signal="body_exited" from="BedInteragir" to="BedInteragir" method="_on_body_exited"]

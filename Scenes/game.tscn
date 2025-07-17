@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1ia10g4yl2wr"]
+
+[ext_resource type="Script" uid="uid://c4lyvcv0km3k3" path="res://Scripts/game.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://d4jualq0fuwhi" path="res://Scenes/character.tscn" id="2_feb5d"]
+
+[node name="Game" type="Node2D" groups=["game"]]
+script = ExtResource("1_e2o6t")
+
+[node name="Character" parent="." instance=ExtResource("2_feb5d")]
+
+[node name="CurrentMap" type="Node2D" parent="."]
+
+[node name="CutsceneLayer" type="CanvasLayer" parent="."]
