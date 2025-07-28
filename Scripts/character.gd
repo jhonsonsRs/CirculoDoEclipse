@@ -5,11 +5,20 @@ var _state_machine
 var is_dead = false
 var _is_attacking: bool = false
 var tem_lanterna: bool = false
+var is_invencible: bool = false
 
 @export_category("Variables")
 @export var speed: float = 64.0;
 @export var _acceleration: float = 0.4
 @export var _friction: float = 0.8
+
+@export_category("Combat")
+@export var health := 5
+@export var knockback_force := 200.0
+@export var knockback_time := 0.15
+
+var knock_dir := Vector2.ZERO
+var knock_timer := 0.0
 
 @export_category("Objects")
 @export var _animation_tree: AnimationTree = null
@@ -17,6 +26,9 @@ var tem_lanterna: bool = false
 @export var bullet_node: PackedScene
 
 @onready var point_light: PointLight2D = $PointLight2D
+@onready var invencibility_timer: Timer = $InvencibilityTimer
+@onready var blink_timer: Timer = $BlinkTimer
+
 func _ready() -> void:
 	_animation_tree.active = true
 	_state_machine = _animation_tree["parameters/playback"]
@@ -24,6 +36,12 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if is_dead:
 		return 
+	if knock_timer > 0.0:
+		knock_timer -= _delta
+		velocity = knock_dir * knockback_force
+		_animate()
+		move_and_slide()
+		return
 	_move()
 	_attack()
 	_animate()
@@ -108,12 +126,34 @@ func save_data() -> Dictionary:
 func load_data(data: Dictionary):
 	global_position = Vector2(data["position"]["x"], data["position"]["y"])
 	
-func shoot():
-	var bullet = bullet_node.instantiate()
-	bullet.position = global_position
-	bullet.direction = (get_global_mouse_position() - global_position).normalized()
-	get_tree().current_scene.call_deferred("add_child",bullet)
+func take_damage(dmg: int, attacker_pos: Vector2) -> void:
+	if is_dead or is_invencible:
+		return
+	
+	health -= dmg
+	
+	apply_knockback(attacker_pos)
+	get_node("/root/Game").shake_camera()
+	
+	if health > 0:
+		is_invencible = true
+		invencibility_timer.start()
+		blink_timer.start()
+	else:
+		die()
 
-func _input(event):
-	if event.is_action("shoot"):
-		shoot()
+func apply_knockback(attacker_pos: Vector2) -> void:
+	knock_dir = (global_position - attacker_pos).normalized()
+	knock_timer = knockback_time
+	
+func _on_BlinkTimer_timeout() -> void:
+	if self.modulate.a == 1.0:
+		self.modulate.a = 0.3
+	else: 
+		self.modulate.a = 1.0
+		
+func _on_InvencibilityTimer_timeout()-> void:
+	is_invencible = false
+	blink_timer.stop()
+	self.modulate.a = 1.0
+	

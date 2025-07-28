@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://85hjbwdkfedo"]
+[gd_scene load_steps=29 format=3 uid="uid://85hjbwdkfedo"]
 
 [ext_resource type="Script" uid="uid://ciofkbu2al0ng" path="res://Scripts/golem_boss.gd" id="1_aqicj"]
 [ext_resource type="Texture2D" uid="uid://2thrcvqr8po0" path="res://Assets/Mecha-stone Golem 0.1/Mecha-stone Golem 0.1/PNG sheet/Character_sheet.png" id="1_roj7m"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://b6rt6gyqbm2sd" path="res://Scripts/armor_buff.gd" id="11_6ymex"]
 [ext_resource type="Script" uid="uid://d82fccjytgfj" path="res://Scripts/dash.gd" id="11_ghgg8"]
 [ext_resource type="Script" uid="uid://cw2neamt1e7sv" path="res://Scripts/death.gd" id="13_6ymex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ymex"]
+size = Vector2(30, 42)
 
 [sub_resource type="Animation" id="Animation_73py6"]
 length = 0.001
@@ -31,7 +34,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/path = NodePath("Flipper/Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -60,7 +63,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -88,7 +91,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -148,7 +151,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -176,7 +179,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -206,7 +209,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -266,7 +269,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -291,12 +294,11 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_4geyw"]
 resource_name = "melee_attack"
 length = 0.875013
-loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -317,6 +319,23 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flipper/MeleeHitbox/CollisionShape2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.125, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["disabled", true],
+"method": &"set_deferred"
+}, {
+"args": ["disabled", false],
+"method": &"set_deferred"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_u34ji"]
 resource_name = "ranged_attack"
@@ -325,7 +344,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Flipper/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -374,10 +393,19 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_aqicj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Flipper" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Flipper"]
 texture = ExtResource("1_roj7m")
 hframes = 10
 vframes = 10
+
+[node name="MeleeHitbox" type="Area2D" parent="Flipper"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/MeleeHitbox"]
+position = Vector2(27, 3)
+shape = SubResource("RectangleShape2D_6ymex")
+disabled = true
 
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2(2, -17)
@@ -483,4 +511,5 @@ script = ExtResource("11_ghgg8")
 [node name="Death" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("13_6ymex")
 
+[connection signal="body_entered" from="Flipper/MeleeHitbox" to="." method="_on_melee_hitbox_body_entered"]
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/Idle" method="_on_player_detection_body_entered"]

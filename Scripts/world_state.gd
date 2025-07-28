@@ -3,7 +3,10 @@ extends Node
 
 var items := {
 	"book_cabana": true,
-	"lantern_cabana": true
+	"lantern_cabana": true,
+	"corrupted_crystal_1": true,
+	"corrupted_crystal_2": true,
+	"corrupted_crystal_3": true
 }
 
 var entity_states := {
@@ -13,7 +16,11 @@ var entity_states := {
 }
 
 var quest_completion := {
-	"kill_slimes": false
+	"leave_cabin": false,
+	"go_to_alchemist": false,
+	"talk_to_alchemist": false,
+	"enter_distorted_forest": false,
+	"purify_crystals": false
 }
 
 func is_active(id: String) -> bool:

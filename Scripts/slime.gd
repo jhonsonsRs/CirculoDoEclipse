@@ -10,6 +10,8 @@ var flashing := false
 @export var knockback_force := 300.0
 @export var knockback_time := 0.08
 @export var unique_id: String = ""
+@export var damage_cooldown := 1.0
+var damage_cooldown_timer := 0.0
 
 @export_category("Objects")
 @export var _texture: Sprite2D = null
@@ -55,6 +57,7 @@ func _on_detection_area_body_entered(_body) -> void:
 func _on_detection_area_body_exited(_body) -> void:
 	if _body.is_in_group("character"):
 		_player_ref = null
+		_animation.play("idle")
 		
 		
 		
@@ -72,6 +75,9 @@ func _physics_process(_delta: float) -> void:
 		
 	_animate()
 	
+	if damage_cooldown_timer > 0.0:
+		damage_cooldown_timer -= _delta
+	
 	if _player_ref != null:
 		if _player_ref.is_dead:
 			velocity = Vector2.ZERO
@@ -81,8 +87,9 @@ func _physics_process(_delta: float) -> void:
 		var _direction: Vector2 = global_position.direction_to(_player_ref.global_position)
 		var _distance: float = global_position.distance_to(_player_ref.global_position)
 		
-		if _distance < 20:
-			_player_ref.die()
+		if _distance < 20 and damage_cooldown_timer <= 0.0:
+			_player_ref.take_damage(1, global_position)
+			damage_cooldown_timer = damage_cooldown
 		
 		velocity = _direction * 30
 		move_and_slide()

@@ -20,3 +20,9 @@ func _process(delta: float) -> void:
 		)
 	else:
 		offset = Vector2.ZERO
+
+func set_camera_limit(marker_pos_1: Vector2, marker_pos_2: Vector2) -> void:
+	self.limit_left = min(marker_pos_1.x , marker_pos_2.x)
+	self.limit_top = min(marker_pos_1.y, marker_pos_2.y)
+	self.limit_right = max(marker_pos_1.x, marker_pos_2.x)
+	self.limit_bottom = max(marker_pos_1.y, marker_pos_2.y)

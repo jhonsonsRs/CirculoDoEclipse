@@ -1,16 +1,19 @@
 extends Node
 class_name Quest
 
-#esta é uma classe base
-#é um molde em branco. Diz que toda missão DEVE ter um id e deve ter uma função on_enemy_destroyed
+var mission_id: int
 
-var mission_id
-var level_of_map = { }
-
-#uma função para a missão se configurar quando um novo mapa é carregado
-func on_level_loaded (_level: Level) -> void:
+func on_enemy_destroyed(enemy: Node2D) -> void:
 	pass
 
-#uma função para a missão reagir á morte de um inimigo
-func on_enemy_destroyed(_enemy) -> void:
+func on_map_changed(previous_map_name: String, new_map_name: String) -> void:
+	pass
+
+func on_dialogue_finished(npc_id: String) -> void:
+	pass
+
+func on_zone_entered(zone_id: String) -> void:
+	pass
+
+func on_item_collected(_item_id: String) -> void:
 	pass

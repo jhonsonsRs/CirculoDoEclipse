@@ -5,8 +5,11 @@ class_name Quest_Manager
 
 #lista ordenadas das quests. O valor númerico (0, 1, 2...)
 enum QuestID {
-	KillSlimes,
-	Foo
+	LeaveCabin,
+	GoToAlchemist,
+	TalkToAlchemist,
+	EnterDistortedForest,
+	PurifyCrystals
 }
 
 #armazena a instância da missão que o jogador está fazendo
@@ -14,13 +17,18 @@ var current_quest : Quest
 
 #dicionario que mapeia um QuestID para o script da missão
 var quest_types = {
-	QuestID.KillSlimes : QuestKillSlime
+	QuestID.LeaveCabin : QuestLeaveCabin,
+	QuestID.GoToAlchemist: Quest_GoToAlchemist,
+	QuestID.TalkToAlchemist: Quest_TalkToAlchemist,
+	QuestID.EnterDistortedForest: Quest_EnterDistortedForest,
+	QuestID.PurifyCrystals: Quest_PurifyCrystals
 	# QuestID.Foo : QuestFoo
 }
 
 #aqui instancia a primeira quest quando o jogo inicia
 func _init () -> void:
-	self.current_quest = self.quest_types[QuestID.KillSlimes].new()
+	var start_quest_id = QuestID.LeaveCabin
+	current_quest = quest_types[start_quest_id].new()
 	
 #é chamado pela própria missão quando ela termina. Ele descobre qual é a próxima missão, cria uma nova instância dela e avisa o game_manager
 func on_quest_finish() -> void:

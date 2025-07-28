@@ -83,6 +83,7 @@ size = Vector2(18, 19)
 radius = 82.0244
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("_texture", "_animation") groups=["enemy"]]
+collision_layer = 2
 script = ExtResource("1_03y8y")
 _texture = NodePath("Texture")
 _animation = NodePath("Animation")

@@ -51,3 +51,4 @@ func _on_dialog_finished_enable_interaction() -> void:
 	can_interact = true
 	if player_in_range:
 		icon_instance.visible = true
+	get_tree().get_first_node_in_group("game").on_dialogue_finished("alquimista")
